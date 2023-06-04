@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1> Выберите свое назначение </h1>
+
+<div class='container-row'>
+<button> <a href="{% url 'customer_register' %}"> Пользователь </a> </button>
+<button> <a href="{% url 'supplier_register' %}"> Поставщик </a> </button>
+
+</div>
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% load static %}
+<div class="header">
+    <!-- <div class="container"> -->
+      <div class="header-line">
+        <div class="header-logo">
+          <a href="{% url 'home' %}">
+          <img class="header-logo-img" src={% static "img/logo.svg"%} alt="logo" />
+        </a>
+        </div>
+        <div class="search">
+          <div class="search-img">
+            <img class="search-image" src={% static "img/Search.svg"%} alt="search-img" />
+          </div>
+          <form action="{% url 'search' %}" method='get'>
+          <div class="search-input">
+            <input class="search-input" type="text" placeholder="Поиск" name="q"/>
+          </div>
+        </form>
+        </div>
+        <div class="city">
+          <div class={"location-img"}>
+            <img
+              class="location-image"
+              src={% static "img/Location.png"%}
+              alt="location-img"
+            />
+          </div>
+          <div class="city-lable">
+            <select class="select-city" name="city-name" id="cities">
+              {% if city  %}
+              {% for city in view.get_regions %}
+              <option value="rigatoni">{{ city.name }}</option>
+              {% endfor %}
+              {% else %}
+              <option value="rigatoni">Астана</option>
+              {% endif %}
+            </select>
+          </div>
+          <!-- <img
+            class="dropdown img"
+            src="img/Caret-Right.svg"
+            alt="drop down-arrow"
+          /> -->
+        </div>
+        {% if user.customer.cart.usercart.all != None %}
+        <a href="{{ user.customer.cart.get_absolute_url }}">
+        <div class="shipping-cart">
+          <img class="cart" src={% static "img/cart-init.svg"%} alt="cart" />
+        </div>
+      </a>
+        {% else %}
+        <a href="{{ user.customer.cart.get_absolute_url }}">
+        <div class="shipping-cart">
+          <img class="cart" src={% static "img/Shopping Cart.svg"%} alt="cart" />
+        </div>
+      </a>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+        <div class="city" style="margin-left:10px; margin-right:">
+          <div><a href="{% url 'account_login' %}">Личный кабинет</a></div>
+      </div>
+        {% comment %} <div style="margin-right: 10px"> 
+          {{ user.username}}
+        </div>{% endcomment %}
+        <div class="btn">
+          <a class="button" href="{% url 'account_logout' %}">Выход</a>
+        </div> 
+        {% else %}
+        <div class="btn">
+          <a class="button" href="{% url 'account_login' %}">Вход</a>
+        </div>
+        {% endif %}
+      <!-- </div> -->
+    </div>
+    <br />
+
+  </div>

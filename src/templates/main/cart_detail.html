@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+{% comment %} {% with counter = 0 %} {% endcomment %}
+<div class="container">
+    <div class="container-row">
+      <div class="container-column">
+        <h1> Корзина </h1>
+        {% for item in cart.usercart.all %}
+        {% comment %} {%counter = widthratio counter 1 item.quantity %} {% endcomment %}
+        <div class="cart-product-card">
+          <div class="card-image">
+            <img
+              class="cart-card-img"
+              src="{{ item.product.poster.url }}"
+              alt="item image"
+            />
+          </div>
+          <div class="cart-product-info">
+            <div class="product-name">
+              {{ item.product.name }}
+            </div>
+            <div class="supplier-name"> {{ item.product.supplier.title }} </div>
+            <div class="price">KZT {{ item.product.price }} тенге/шт</div>
+          </div>
+          <div class="cart-item-total">
+            <div class="quantity-counter">
+              <img
+                class="counter-points"
+                src="{% static 'img/ic_round-minus.svg' %}"
+                alt="counter button"
+              />
+              <div class="quantity-total">{{item.quantity}}</div>
+              <img
+                class="counter-points"
+                src="{% static 'img/ic_round-plus.svg' %}"
+                alt="counter button"
+              />
+            </div>
+            <div class="item-total">{% widthratio item.product.price 1 item.quantity %},00 KZT</div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- </div> -->
+        <!-- </div> -->
+      </div>
+      <div class="container-column">
+        <h1></h1>
+        <div class="total-column">
+          <div class="total-row">
+            <div class="total-label">Итого</div>
+            <div class="total-sum">25500,00 KZT</div>
+          </div>
+          <div class="total-details">
+            <div class="total-details-item">Товары</div>
+            <div class="total-details-definition">{{counter}}</div>
+          </div>
+          <div class="btn">
+            <a class="button-pay" href="#">Оплатить</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

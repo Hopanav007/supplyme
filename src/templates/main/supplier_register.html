@@ -1,0 +1,65 @@
+{% extends 'base.html' %} {% block content %}
+<div class='container' style='margin-left: 40%'>
+<div class="profile-main-container">
+  <div class="profile-main">
+    <div class="profile-section-name">Заполните данные поставщика</div>
+    {% comment %} <div class="container-row">
+      <div class="container-column">
+        <div class="profile-name">{{ user.username }}</div>
+      </div>
+    </div> {% endcomment %}
+    <form action="{% url 'supplier_register' %}" method='Post'>
+    {% csrf_token %}
+    <input type='hidden' value={{user.id}} name='user'/>
+    <div class="container-column">
+      <div>Наименование компании*</div>
+      <div class="container-row">
+        <div class="editable-item-container">
+          <input
+            class="editable-item"
+            type="text"
+            placeholder="Имя вашего ИП"
+            name='title'
+            required
+          />
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="container-column">
+        <div>Изображение профиля</div>
+        <div class="container-row">
+          <div class="editable-item-container">
+            <input type="file" name='avatar'/>
+          </div>
+        </div>
+      </div>
+    <div class="container-column">
+      <div>Номер телефона*</div>
+      <div class="container-row">
+        <div class="editable-item-container">
+          <input class="editable-item" type="text" placeholder="+7" name='phone_number' minlength='12' maxlength='12' required/>
+        </div>
+      </div>
+    </div>
+    <div class="container-column">
+      <div>Описание компании*</div>
+      <div class="container-row">
+        <div class="editable-item-container">
+          <input
+            class="editable-item"
+            type="text"
+            placeholder="Розничный магазин"
+            name='description'
+            required
+          />
+        </div>
+      </div>
+    </div>
+    <button type='submit'> Сохранить </button>
+    </form>
+  </div>
+</div>
+</div>
+{% endblock content %}

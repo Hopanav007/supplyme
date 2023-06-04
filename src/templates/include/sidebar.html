@@ -1,0 +1,13 @@
+{% load main_tags %}
+
+
+<div class="sidebar">
+    <div class="sidenav">
+      {% get_categories as categories %}
+      <a class="sidebar-a" href="{% url 'home' %}">Все</a>
+      {% for category in categories %}
+      {% comment %} <input type="checkbox" name="category" value={{category}}> {% endcomment %}
+      <a class="sidebar-a" href="{% url 'filter' id=category.id %}">{{category.name}}</a>
+      {% endfor %}
+    </div>
+  </div>

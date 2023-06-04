@@ -1,0 +1,58 @@
+{% extends 'main/base.html'%}
+
+{% block content %}
+<div class="container">
+<div class="profile-main-container">
+  <div class="container-row">
+    <div class="profile-main">
+      <div class="profile-section-name">Поставщик</div>
+      <div class="container-row">
+        <img class="profile-image" src="{{supplier.avatar.url}}" alt="" />
+        <div class="container-column">
+          <div class="profile-name">{{ supplier.title }}</div>
+        </div>
+      </div>
+      <div class="container-column">
+        <div>Номер телефона</div>
+        <div class="container-row">
+          <div class="editable-item-container">
+            {{supplier.phone_number}}
+          </div>
+        </div>
+      </div>
+
+    <div class="container-column">
+      <div>Электронный адрес</div>
+      <div class="container-row">
+        <div class="editable-item-container">
+          {{supplier.user.email}}
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container-column" style="margin-left:200px">
+    <h1> Товары поставщика </h1>
+    <div class="main-body">
+      {% for product in supplier.product_supplier.all %}
+      <div class="product-card">
+        {% comment %} <a href="{{product.get_absolute_url}}"> {% endcomment %}
+
+        <div class="card-image">
+          <img class="card-img" src="{{product.poster.url}}" alt="item image" />
+        </div>
+        <div class="product-name">{{product.name}}</div>
+      {% comment %} </a> {% endcomment %}
+        <a href="{{product.supplier.get_absolute_url}}">
+        <div class="supplier-name">{{product.supplier.title}}</div>
+      </a>
+        <div class="price">KZT {{product.price}} тенге/шт</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  </div>
+
+</div> 
+</div>
+
+  {% endblock content %}

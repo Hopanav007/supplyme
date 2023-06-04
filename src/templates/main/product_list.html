@@ -1,0 +1,42 @@
+
+{% extends 'main/base.html'%} 
+{% block title %} SupplyMe {% endblock title %}
+{% load static %}
+{% block content %}
+  {% if supplier %}
+  {% else%}
+  <div class="category-navigation">
+    <div class="">Категории</div>
+    <img class="arrow-img" src={% static "img/Caret-Right.svg"%} alt="arrow" />
+    {% if product %}
+    <div class="sub-category">{{product.category.sub_category.name}}</div>
+    <img class="arrow-img" src={% static "img/Caret-Right.svg"%} alt="arrow" />
+    <div class="sub-category">{{product.category}}</div>
+    {% endif %}
+  </div>
+  {% endif %}
+    <div class="container-main">
+      {% include 'include/sidebar.html' %}
+      <div class="main-body">
+        {% for product in product_list %}
+        <div class="product-card">
+          <a href="{{product.get_absolute_url}}">
+
+          <div class="card-image">
+            <img class="card-img" src="{{product.poster.url}}" alt="item image" />
+          </div>
+          <div class="product-name">{{product.name}}</div>
+        </a class='supplier_a'>
+          <a href="{{product.supplier.get_absolute_url}}">
+          <div class="supplier-name">{{product.supplier.title}}</div>
+        </a>
+          <div class="price">KZT {{product.price}} тенге/шт</div>
+        </div>
+        {% endfor %}
+      </div>
+      {% comment %} <div class="grid-img-right">
+        {% include 'include/pagination.html' %}
+      </div> {% endcomment %}
+    </div>
+
+{% endblock content %}
